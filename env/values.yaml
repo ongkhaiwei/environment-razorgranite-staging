@@ -12,3 +12,21 @@ cleanup:
   Annotations:
     helm.sh/hook: pre-delete
     helm.sh/hook-delete-policy: hook-succeeded
+expose:
+  config:
+    domain: democluster.au-syd.containers.appdomain.cloud
+    exposer: Ingress
+    http: "true"
+    tlsacme: "false"
+    pathMode: ""
+  Annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-delete-policy: hook-succeeded
+jenkins:
+  Servers:
+    Global:
+      EnvVars:
+        DOCKER_REGISTRY: registry.au-syd.bluemix.net
+        TILLER_NAMESPACE: kube-system
+PipelineSecrets:
+  DockerConfig: '{"auths":{"registry.au-syd.bluemix.net":{"auth":"dG9rZW46ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnFkR2tpT2lKbFlURmhORGM1WVMxa056SmtMVFV5TW1NdFltUm1aUzFoTkdFME16VmtOalU1T1RZaUxDSnBjM01pT2lKeVpXZHBjM1J5ZVM1aGRTMXplV1F1WW14MVpXMXBlQzV1WlhRaWZRLlJic0RpNGRKU2R0UmZ1VExqcGdwS3NHYXF2ODFDeWlQSFlybHJzeHFtcnc="}}}'
